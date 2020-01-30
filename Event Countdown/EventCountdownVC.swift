@@ -11,6 +11,10 @@ import UIKit
 class EventCountdownVC: UIViewController {
     
     @IBOutlet weak var myEventsLabel: UILabel!
+    @IBOutlet weak var currentDateLabel: UILabel!
+    
+    
+    var timer: Timer?
     
     let emptyCollectionViewLabel: UILabel = {
         let label = UILabel()
@@ -24,6 +28,11 @@ class EventCountdownVC: UIViewController {
     
     func configure() {
         configureEmptyCollectionViewLabel()
+        configureCurrentDateLabel()
+    }
+    
+    func setupUI() {
+        
     }
     
     func configureEmptyCollectionViewLabel() {
@@ -43,7 +52,20 @@ class EventCountdownVC: UIViewController {
             emptyCollectionViewLabel.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
-
+    
+    func configureCurrentDateLabel() {
+        let date = NSDate()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute, .month, .year, .day, .second], from: date as Date)
+        
+        DispatchQueue.main.async {
+            self.currentDateLabel.text = "\(components.day ?? 0) / \(components.month ?? 0) / \(components.year ?? 0)"
+        }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
 
 }
 
