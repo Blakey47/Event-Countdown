@@ -40,7 +40,7 @@ class EventCountdownVC: UIViewController {
     }
     
     @IBAction func addButtonDidTap(_ sender: Any) {
-        let newEvent = Event(name: "temp", description: "temp", date: Date())
+        let newEvent = Event(name: "Ste and Amy's Wedding", description: "Wedding Time", date: Date())
         events.append(newEvent)
         updateData()
     }
@@ -97,7 +97,7 @@ class EventCountdownVC: UIViewController {
         
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        flowLayout.itemSize = CGSize(width: itemWidth, height: 150)
+        flowLayout.itemSize = CGSize(width: itemWidth, height: 300)
         
         return flowLayout
     }

@@ -11,9 +11,9 @@ import UIKit
 class EventCell: UICollectionViewCell {
     static let reuseID = "EventCell"
     
-    var eventNameLabel = UILabel()
-    var eventDistriptionLabel = UILabel()
-    var eventCountdownTimeLabel = UILabel()
+    var eventNameLabel = ECTitleLabel(textAlignment: .center, fontSize: 18)
+    var eventDistriptionLabel = ECBodyLabel(textAlignment: .center)
+    var eventCountdownTimeLabel = ECBodyLabel(textAlignment: .center)
     var eventCountdownDate = DateComponents()
     var eventDueDate = UILabel()
     var eventImageView = ECEventImageView(frame: .zero)
@@ -24,7 +24,7 @@ class EventCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(runTimer), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(runTimer), userInfo: nil, repeats: true)
     }
     
     required init?(coder: NSCoder) {
@@ -56,13 +56,38 @@ class EventCell: UICollectionViewCell {
         let timeLeft = userCalendar.dateComponents([.day, .hour, .minute, .second], from: currentDate, to: eventDate)
         
         // Display Countdown
-        eventCountdownTimeLabel.text = "\(timeLeft.day ?? 0)d \(timeLeft.hour ?? 0)h \(timeLeft.minute ?? 0)m \(timeLeft.second ?? 0)s"
+        eventCountdownTimeLabel.text = calculateTimer(for: timeLeft)
+        
+    }
+    
+    private func calculateTimer(for timeLeft: DateComponents) -> String {
+        if timeLeft.day! > 3 {
+            return "In \(timeLeft.day ?? 0) days"
+        } else if timeLeft.day! > 1 {
+            return "In \(timeLeft.day ?? 0) days, \(timeLeft.hour ?? 0) hours and \(timeLeft.minute ?? 0) minutes"
+        } else if timeLeft.hour! > 1 {
+            return "In \(timeLeft.hour ?? 0) hours and \(timeLeft.minute ?? 0) minutes"
+        } else if timeLeft.minute! > 1 {
+            return "\(timeLeft.minute ?? 0) minutes and \(timeLeft.second ?? 0) seconds"
+        } else if timeLeft.second! > 1{
+            return "\(timeLeft.second ?? 0) seconds to go"
+        } else if timeLeft.second! < 0 && timeLeft.second! > -3{
+            return "Now"
+        } else if timeLeft.minute! > -1 && timeLeft.hour! > -1 && timeLeft.day! > -1 {
+            return "\(timeLeft.second ?? 0) seconds ago"
+        } else if timeLeft.hour! > -1 && timeLeft.day! > -1 {
+            return "\(timeLeft.minute ?? 0) minutes ago"
+        } else if timeLeft.day! > -1 {
+            return "\(timeLeft.hour ?? 0) hours ago"
+        } else {
+            return "\(timeLeft.day ?? 0) days ago"
+        }
     }
     
     private func configure() {
         configureEventImageView()
         configureEventNameLabel()
-        
+        configureEventCountdownLabel()
     }
     
     private func configureEventImageView() {
@@ -78,34 +103,36 @@ class EventCell: UICollectionViewCell {
     
     private func configureEventNameLabel() {
         eventImageView.addSubview(eventNameLabel)
-        eventNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        eventNameLabel.textAlignment = .center
-        eventNameLabel.textColor = .white
-        eventNameLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        
-        eventNameLabel.backgroundColor = .blue
         
         NSLayoutConstraint.activate([
             eventNameLabel.topAnchor.constraint(equalTo: eventImageView.topAnchor, constant: 8),
             eventNameLabel.leadingAnchor.constraint(equalTo: eventImageView.leadingAnchor, constant: padding),
             eventNameLabel.trailingAnchor.constraint(equalTo: eventImageView.trailingAnchor, constant: -padding),
-            eventNameLabel.heightAnchor.constraint(equalToConstant: 16)
+            eventNameLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
     
-    private func configureEventDescriptionLabel() {
-        eventImageView.addSubview(eventDistriptionLabel)
-        eventDistriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        eventDistriptionLabel.backgroundColor = .blue
-        eventDistriptionLabel.font = UIFont.systemFont(ofSize: 12, weight: .light)
-        eventDistriptionLabel.textColor = .white
-        eventDistriptionLabel.numberOfLines = 3
+    private func configureEventCountdownLabel() {
+        eventImageView.addSubview(eventCountdownTimeLabel)
         
         NSLayoutConstraint.activate([
-            eventDistriptionLabel.topAnchor.constraint(equalTo: eventNameLabel.bottomAnchor, constant: padding),
-            eventDistriptionLabel.leadingAnchor.constraint(equalTo: eventImageView.leadingAnchor, constant: padding),
-            eventDistriptionLabel.trailingAnchor.constraint(equalTo: eventImageView.trailingAnchor, constant: -padding),
-            eventDistriptionLabel.heightAnchor.constraint(equalToConstant: 40)
+            eventCountdownTimeLabel.bottomAnchor.constraint(equalTo: eventImageView.bottomAnchor, constant: -padding),
+            eventCountdownTimeLabel.leadingAnchor.constraint(equalTo: eventImageView.leadingAnchor, constant: padding),
+            eventCountdownTimeLabel.trailingAnchor.constraint(equalTo: eventImageView.trailingAnchor, constant: -padding),
+            eventCountdownTimeLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
+    
+//    private func configureEventDescriptionLabel() {
+//        eventImageView.addSubview(eventDistriptionLabel)
+//
+//        eventDistriptionLabel.backgroundColor = .black
+//
+//        NSLayoutConstraint.activate([
+//            eventDistriptionLabel.topAnchor.constraint(equalTo: eventNameLabel.bottomAnchor, constant: 10),
+//            eventDistriptionLabel.leadingAnchor.constraint(equalTo: eventImageView.leadingAnchor, constant: padding),
+//            eventDistriptionLabel.trailingAnchor.constraint(equalTo: eventImageView.trailingAnchor, constant: -padding),
+//            eventDistriptionLabel.heightAnchor.constraint(equalToConstant: 50)
+//        ])
+//    }
 }

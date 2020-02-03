@@ -16,6 +16,8 @@
 		028FCE5B23E83099004194DF /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FCE5A23E83099004194DF /* Event.swift */; };
 		028FCE5F23E8344E004194DF /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FCE5E23E8344E004194DF /* EventCell.swift */; };
 		028FCE6123E835A7004194DF /* ECEventImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FCE6023E835A7004194DF /* ECEventImageView.swift */; };
+		028FCE6923E871CF004194DF /* ECTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FCE6823E871CF004194DF /* ECTitleLabel.swift */; };
+		028FCE6B23E87351004194DF /* ECBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FCE6A23E87351004194DF /* ECBodyLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		028FCE5A23E83099004194DF /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		028FCE5E23E8344E004194DF /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		028FCE6023E835A7004194DF /* ECEventImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECEventImageView.swift; sourceTree = "<group>"; };
+		028FCE6823E871CF004194DF /* ECTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECTitleLabel.swift; sourceTree = "<group>"; };
+		028FCE6A23E87351004194DF /* ECBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECBodyLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,18 +66,68 @@
 		028FCE4523E310A2004194DF /* Event Countdown */ = {
 			isa = PBXGroup;
 			children = (
+				028FCE6423E87146004194DF /* CustomViews */,
+				028FCE6323E87138004194DF /* Modals */,
+				028FCE6223E8712B004194DF /* Screens */,
 				028FCE4623E310A2004194DF /* AppDelegate.swift */,
 				028FCE4823E310A2004194DF /* SceneDelegate.swift */,
-				028FCE4A23E310A2004194DF /* EventCountdownVC.swift */,
 				028FCE4C23E310A2004194DF /* Main.storyboard */,
 				028FCE4F23E310A6004194DF /* Assets.xcassets */,
 				028FCE5123E310A6004194DF /* LaunchScreen.storyboard */,
 				028FCE5423E310A6004194DF /* Info.plist */,
-				028FCE5A23E83099004194DF /* Event.swift */,
-				028FCE5E23E8344E004194DF /* EventCell.swift */,
-				028FCE6023E835A7004194DF /* ECEventImageView.swift */,
 			);
 			path = "Event Countdown";
+			sourceTree = "<group>";
+		};
+		028FCE6223E8712B004194DF /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				028FCE4A23E310A2004194DF /* EventCountdownVC.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		028FCE6323E87138004194DF /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				028FCE5A23E83099004194DF /* Event.swift */,
+			);
+			path = Modals;
+			sourceTree = "<group>";
+		};
+		028FCE6423E87146004194DF /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				028FCE6723E871A9004194DF /* Labels */,
+				028FCE6623E8715E004194DF /* ImageViews */,
+				028FCE6523E87159004194DF /* Cells */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		028FCE6523E87159004194DF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				028FCE5E23E8344E004194DF /* EventCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		028FCE6623E8715E004194DF /* ImageViews */ = {
+			isa = PBXGroup;
+			children = (
+				028FCE6023E835A7004194DF /* ECEventImageView.swift */,
+			);
+			path = ImageViews;
+			sourceTree = "<group>";
+		};
+		028FCE6723E871A9004194DF /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				028FCE6823E871CF004194DF /* ECTitleLabel.swift */,
+				028FCE6A23E87351004194DF /* ECBodyLabel.swift */,
+			);
+			path = Labels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,7 +203,9 @@
 			files = (
 				028FCE5B23E83099004194DF /* Event.swift in Sources */,
 				028FCE4B23E310A2004194DF /* EventCountdownVC.swift in Sources */,
+				028FCE6B23E87351004194DF /* ECBodyLabel.swift in Sources */,
 				028FCE4723E310A2004194DF /* AppDelegate.swift in Sources */,
+				028FCE6923E871CF004194DF /* ECTitleLabel.swift in Sources */,
 				028FCE6123E835A7004194DF /* ECEventImageView.swift in Sources */,
 				028FCE4923E310A2004194DF /* SceneDelegate.swift in Sources */,
 				028FCE5F23E8344E004194DF /* EventCell.swift in Sources */,
