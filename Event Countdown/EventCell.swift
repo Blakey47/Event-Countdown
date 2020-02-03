@@ -14,11 +14,12 @@ class EventCell: UICollectionViewCell {
     var eventNameLabel = UILabel()
     var eventDistriptionLabel = UILabel()
     var eventCountdownTimeLabel = UILabel()
-    var eventCountdownDate = Date()
+    var eventCountdownDate = DateComponents()
+    var eventDueDate = UILabel()
     var eventImageView = ECEventImageView(frame: .zero)
     
     let padding: CGFloat = 20
-    let timer: Timer
+    var timer: Timer!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,21 +34,36 @@ class EventCell: UICollectionViewCell {
     func set(event: Event) {
         eventNameLabel.text = event.name
         eventDistriptionLabel.text = event.description
-        eventCountdownDate = event.date
+        
+        // Setting the Due Date
+        let eventDate = event.date
+        let calendar = Calendar.current
+        eventCountdownDate = calendar.dateComponents([ .year, .month, .day, .hour, .minute, .second], from: eventDate as Date)
+        eventDueDate.text = "Year: \(eventCountdownDate.year ?? 0) Month: \(eventCountdownDate.month ?? 0) Day: \(eventCountdownDate.day ?? 0) Hour: \(eventCountdownDate.hour ?? 0) Minute: \(eventCountdownDate.minute ?? 0)"
     }
     
     @objc func runTimer() {
-        // Setting the current Date
-        let date = NSDate()
-        let calendar = Calendar.current
-        
-        let components = calendar.dateComponents([ .year, .month, .day, .hour, .minute, .second], from: date as Date)
-        let currentDate = calendar.date(from: components)
         let userCalendar = Calendar.current
+        // Setting the current Date
+        let date = Date()
+        let components = userCalendar.dateComponents([.hour, .minute, .month, .year, .day, . second], from: date)
+        guard let currentDate = userCalendar.date(from: components) else {return}
+        
+        // Convert eventCountdownDate to the user's calendar
+        guard let eventDate = userCalendar.date(from: eventCountdownDate) else {return}
+        
+        // Change the seconds to days, hours, minutes and seconds
+        let timeLeft = userCalendar.dateComponents([.day, .hour, .minute, .second], from: currentDate, to: eventDate)
+        
+        // Display Countdown
+        eventCountdownTimeLabel.text = "\(timeLeft.day ?? 0)d \(timeLeft.hour ?? 0)h \(timeLeft.minute ?? 0)m \(timeLeft.second ?? 0)s"
+        print(eventCountdownTimeLabel.text!)
     }
     
     private func configure() {
         configureEventImageView()
+        configureEventNameLabel()
+        
     }
     
     private func configureEventImageView() {
@@ -78,7 +94,19 @@ class EventCell: UICollectionViewCell {
         ])
     }
     
-    private func configureCountdownTimer() {
+    private func configureEventDescriptionLabel() {
+        eventImageView.addSubview(eventDistriptionLabel)
+        eventDistriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        eventDistriptionLabel.backgroundColor = .blue
+        eventDistriptionLabel.font = UIFont.systemFont(ofSize: 12, weight: .light)
+        eventDistriptionLabel.textColor = .white
+        eventDistriptionLabel.numberOfLines = 3
         
+        NSLayoutConstraint.activate([
+            eventDistriptionLabel.topAnchor.constraint(equalTo: eventNameLabel.bottomAnchor, constant: padding),
+            eventDistriptionLabel.leadingAnchor.constraint(equalTo: eventImageView.leadingAnchor, constant: padding),
+            eventDistriptionLabel.trailingAnchor.constraint(equalTo: eventImageView.trailingAnchor, constant: -padding),
+            eventDistriptionLabel.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
 }

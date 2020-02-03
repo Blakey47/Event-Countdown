@@ -28,6 +28,7 @@ class EventCountdownVC: UIViewController {
     func configure() {
         configureEmptyCollectionViewLabel()
         configureCurrentDateLabel()
+        configureCollectionView()
     }
     
     func setupUI() {
@@ -53,9 +54,20 @@ class EventCountdownVC: UIViewController {
     }
     
     func configureCollectionView() {
-        collectionView = UICollectionView(frame: <#T##CGRect#>, collectionViewLayout: <#T##UICollectionViewLayout#>)
+        // Initial CollectionView
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createSingleColumnFlowLayout())
         view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+
+        collectionView.backgroundColor = .clear
+        collectionView.register(EventCell.self, forCellWithReuseIdentifier: EventCell.reuseID)
         
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: myEventsLabel.bottomAnchor, constant: 20),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     func configureCurrentDateLabel() {
@@ -66,6 +78,18 @@ class EventCountdownVC: UIViewController {
         DispatchQueue.main.async {
             self.currentDateLabel.text = "\(components.day ?? 0) / \(components.month ?? 0) / \(components.year ?? 0)"
         }
+    }
+    
+    func createSingleColumnFlowLayout() -> UICollectionViewFlowLayout {
+        let width = view.bounds.width
+        let padding: CGFloat = 12
+        let itemWidth = width - (padding * 2)
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
+        flowLayout.itemSize = CGSize(width: itemWidth, height: 150)
+        
+        return flowLayout
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
