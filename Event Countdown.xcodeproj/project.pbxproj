@@ -13,6 +13,10 @@
 		028FCE4E23E310A2004194DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 028FCE4C23E310A2004194DF /* Main.storyboard */; };
 		028FCE5023E310A6004194DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 028FCE4F23E310A6004194DF /* Assets.xcassets */; };
 		028FCE5323E310A6004194DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 028FCE5123E310A6004194DF /* LaunchScreen.storyboard */; };
+		028FCE5B23E83099004194DF /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FCE5A23E83099004194DF /* Event.swift */; };
+		028FCE5D23E83202004194DF /* EventCountdownCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FCE5C23E83202004194DF /* EventCountdownCollectionView.swift */; };
+		028FCE5F23E8344E004194DF /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FCE5E23E8344E004194DF /* EventCell.swift */; };
+		028FCE6123E835A7004194DF /* ECEventImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FCE6023E835A7004194DF /* ECEventImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		028FCE4F23E310A6004194DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		028FCE5223E310A6004194DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		028FCE5423E310A6004194DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		028FCE5A23E83099004194DF /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		028FCE5C23E83202004194DF /* EventCountdownCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCountdownCollectionView.swift; sourceTree = "<group>"; };
+		028FCE5E23E8344E004194DF /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		028FCE6023E835A7004194DF /* ECEventImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECEventImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +71,10 @@
 				028FCE4F23E310A6004194DF /* Assets.xcassets */,
 				028FCE5123E310A6004194DF /* LaunchScreen.storyboard */,
 				028FCE5423E310A6004194DF /* Info.plist */,
+				028FCE5A23E83099004194DF /* Event.swift */,
+				028FCE5C23E83202004194DF /* EventCountdownCollectionView.swift */,
+				028FCE5E23E8344E004194DF /* EventCell.swift */,
+				028FCE6023E835A7004194DF /* ECEventImageView.swift */,
 			);
 			path = "Event Countdown";
 			sourceTree = "<group>";
@@ -138,9 +150,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				028FCE5B23E83099004194DF /* Event.swift in Sources */,
 				028FCE4B23E310A2004194DF /* EventCountdownVC.swift in Sources */,
 				028FCE4723E310A2004194DF /* AppDelegate.swift in Sources */,
+				028FCE6123E835A7004194DF /* ECEventImageView.swift in Sources */,
 				028FCE4923E310A2004194DF /* SceneDelegate.swift in Sources */,
+				028FCE5F23E8344E004194DF /* EventCell.swift in Sources */,
+				028FCE5D23E83202004194DF /* EventCountdownCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,7 @@ class EventCountdownVC: UIViewController {
     
     
     var timer: Timer?
+    var collectionView: UICollectionView!
     
     let emptyCollectionViewLabel: UILabel = {
         let label = UILabel()
@@ -51,6 +52,12 @@ class EventCountdownVC: UIViewController {
             emptyCollectionViewLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             emptyCollectionViewLabel.heightAnchor.constraint(equalToConstant: 60)
         ])
+    }
+    
+    func configureCollectionView() {
+        collectionView = UICollectionView(frame: <#T##CGRect#>, collectionViewLayout: <#T##UICollectionViewLayout#>)
+        view.addSubview(collectionView)
+        
     }
     
     func configureCurrentDateLabel() {
