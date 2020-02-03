@@ -25,6 +25,9 @@
                                 <state key="normal" backgroundImage="plus.app.fill" catalog="system">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="addButtonDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M6x-J8-HZ2"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Celebration" translatesAutoresizingMaskIntoConstraints="NO" id="Dbu-QH-u4w">
                                 <rect key="frame" x="0.0" y="261" width="414" height="601"/>

@@ -57,7 +57,6 @@ class EventCell: UICollectionViewCell {
         
         // Display Countdown
         eventCountdownTimeLabel.text = "\(timeLeft.day ?? 0)d \(timeLeft.hour ?? 0)h \(timeLeft.minute ?? 0)m \(timeLeft.second ?? 0)s"
-        print(eventCountdownTimeLabel.text!)
     }
     
     private func configure() {

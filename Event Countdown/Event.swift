@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Event {
+struct Event: Hashable {
     var name: String
     var description: String
     var date: Date

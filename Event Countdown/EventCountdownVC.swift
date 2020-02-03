@@ -10,15 +10,22 @@ import UIKit
 
 class EventCountdownVC: UIViewController {
     
+    enum Section {
+        case main
+    }
+    
     @IBOutlet weak var myEventsLabel: UILabel!
     @IBOutlet weak var currentDateLabel: UILabel!
     
     var collectionView: UICollectionView!
+    var dataSource: UICollectionViewDiffableDataSource<Section, Event>!
     
     let emptyCollectionViewLabel: UILabel = {
         let label = UILabel()
         return label
     }()
+    
+    var events: [Event] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +36,13 @@ class EventCountdownVC: UIViewController {
         configureEmptyCollectionViewLabel()
         configureCurrentDateLabel()
         configureCollectionView()
+        configureDataSource()
     }
     
-    func setupUI() {
-        
+    @IBAction func addButtonDidTap(_ sender: Any) {
+        let newEvent = Event(name: "temp", description: "temp", date: Date())
+        events.append(newEvent)
+        updateData()
     }
     
     func configureEmptyCollectionViewLabel() {
@@ -90,6 +100,23 @@ class EventCountdownVC: UIViewController {
         flowLayout.itemSize = CGSize(width: itemWidth, height: 150)
         
         return flowLayout
+    }
+    
+    func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, Event>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, event) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EventCell.reuseID, for: indexPath) as! EventCell
+            cell.set(event: event)
+            return cell
+        })
+    }
+    
+    func updateData() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Event>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(events)
+        DispatchQueue.main.async {
+            self.dataSource.apply(snapshot, animatingDifferences: true)
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
