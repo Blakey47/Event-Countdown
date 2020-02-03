@@ -26,5 +26,6 @@ class ECEventImageView: UIImageView {
         clipsToBounds = true
         image = placeholderImage
         translatesAutoresizingMaskIntoConstraints = false
+        contentMode = .scaleAspectFill
     }
 }

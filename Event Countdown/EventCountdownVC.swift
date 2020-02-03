@@ -13,8 +13,6 @@ class EventCountdownVC: UIViewController {
     @IBOutlet weak var myEventsLabel: UILabel!
     @IBOutlet weak var currentDateLabel: UILabel!
     
-    
-    var timer: Timer?
     var collectionView: UICollectionView!
     
     let emptyCollectionViewLabel: UILabel = {
