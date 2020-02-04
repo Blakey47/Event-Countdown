@@ -10,7 +10,7 @@ import UIKit
 
 class ECEventImageView: UIImageView {
     
-    var placeholderImage = UIImage(named: "CelebrationPlaceholder")
+    var placeholderImage = UIImage(named: "wedding")
 
     override init(frame: CGRect) {
         super.init(frame: frame)

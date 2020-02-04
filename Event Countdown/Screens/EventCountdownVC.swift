@@ -25,16 +25,25 @@ class EventCountdownVC: UIViewController {
         return label
     }()
     
+    let addEventView = UIView()
+    
     var events: [Event] = []
-
+    
+    
+    
+    // MARK: ViewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
     }
     
+    
+    
+    // MARK: Configure UI
+    
     func configure() {
         configureEmptyCollectionViewLabel()
-        configureCurrentDateLabel()
         configureCollectionView()
         configureDataSource()
     }
@@ -80,16 +89,6 @@ class EventCountdownVC: UIViewController {
         ])
     }
     
-    func configureCurrentDateLabel() {
-        let date = NSDate()
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.hour, .minute, .month, .year, .day, .second], from: date as Date)
-        
-        DispatchQueue.main.async {
-            self.currentDateLabel.text = "\(components.day ?? 0) / \(components.month ?? 0) / \(components.year ?? 0)"
-        }
-    }
-    
     func createSingleColumnFlowLayout() -> UICollectionViewFlowLayout {
         let width = view.bounds.width
         let padding: CGFloat = 12
@@ -101,6 +100,10 @@ class EventCountdownVC: UIViewController {
         
         return flowLayout
     }
+    
+    
+    
+    // MARK: Data Source
     
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Event>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, event) -> UICollectionViewCell? in

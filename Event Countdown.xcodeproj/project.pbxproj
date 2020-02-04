@@ -18,6 +18,8 @@
 		028FCE6123E835A7004194DF /* ECEventImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FCE6023E835A7004194DF /* ECEventImageView.swift */; };
 		028FCE6923E871CF004194DF /* ECTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FCE6823E871CF004194DF /* ECTitleLabel.swift */; };
 		028FCE6B23E87351004194DF /* ECBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FCE6A23E87351004194DF /* ECBodyLabel.swift */; };
+		028FCE6D23E97653004194DF /* EventDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FCE6C23E97653004194DF /* EventDetailsVC.swift */; };
+		028FCE7123E9FBDC004194DF /* EventOverviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028FCE7023E9FBDC004194DF /* EventOverviewVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		028FCE6023E835A7004194DF /* ECEventImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECEventImageView.swift; sourceTree = "<group>"; };
 		028FCE6823E871CF004194DF /* ECTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECTitleLabel.swift; sourceTree = "<group>"; };
 		028FCE6A23E87351004194DF /* ECBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECBodyLabel.swift; sourceTree = "<group>"; };
+		028FCE6C23E97653004194DF /* EventDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsVC.swift; sourceTree = "<group>"; };
+		028FCE7023E9FBDC004194DF /* EventOverviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOverviewVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,8 @@
 			isa = PBXGroup;
 			children = (
 				028FCE4A23E310A2004194DF /* EventCountdownVC.swift */,
+				028FCE6C23E97653004194DF /* EventDetailsVC.swift */,
+				028FCE7023E9FBDC004194DF /* EventOverviewVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -205,7 +211,9 @@
 				028FCE4B23E310A2004194DF /* EventCountdownVC.swift in Sources */,
 				028FCE6B23E87351004194DF /* ECBodyLabel.swift in Sources */,
 				028FCE4723E310A2004194DF /* AppDelegate.swift in Sources */,
+				028FCE7123E9FBDC004194DF /* EventOverviewVC.swift in Sources */,
 				028FCE6923E871CF004194DF /* ECTitleLabel.swift in Sources */,
+				028FCE6D23E97653004194DF /* EventDetailsVC.swift in Sources */,
 				028FCE6123E835A7004194DF /* ECEventImageView.swift in Sources */,
 				028FCE4923E310A2004194DF /* SceneDelegate.swift in Sources */,
 				028FCE5F23E8344E004194DF /* EventCell.swift in Sources */,

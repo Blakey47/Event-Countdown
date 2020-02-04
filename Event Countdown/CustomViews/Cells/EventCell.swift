@@ -11,9 +11,9 @@ import UIKit
 class EventCell: UICollectionViewCell {
     static let reuseID = "EventCell"
     
-    var eventNameLabel = ECTitleLabel(textAlignment: .center, fontSize: 18)
-    var eventDistriptionLabel = ECBodyLabel(textAlignment: .center)
-    var eventCountdownTimeLabel = ECBodyLabel(textAlignment: .center)
+    var eventNameLabel = ECTitleLabel(textAlignment: .left, fontSize: 22)
+    var eventDistriptionLabel = ECBodyLabel(textAlignment: .left)
+    var eventCountdownTimeLabel = ECBodyLabel(textAlignment: .left)
     var eventCountdownDate = DateComponents()
     var eventDueDate = UILabel()
     var eventImageView = ECEventImageView(frame: .zero)
@@ -71,16 +71,9 @@ class EventCell: UICollectionViewCell {
             return "\(timeLeft.minute ?? 0) minutes and \(timeLeft.second ?? 0) seconds"
         } else if timeLeft.second! > 1{
             return "\(timeLeft.second ?? 0) seconds to go"
-        } else if timeLeft.second! < 0 && timeLeft.second! > -3{
-            return "Now"
-        } else if timeLeft.minute! > -1 && timeLeft.hour! > -1 && timeLeft.day! > -1 {
-            return "\(timeLeft.second ?? 0) seconds ago"
-        } else if timeLeft.hour! > -1 && timeLeft.day! > -1 {
-            return "\(timeLeft.minute ?? 0) minutes ago"
-        } else if timeLeft.day! > -1 {
-            return "\(timeLeft.hour ?? 0) hours ago"
         } else {
-            return "\(timeLeft.day ?? 0) days ago"
+            timer.invalidate()
+            return "Now"
         }
     }
     
@@ -108,7 +101,7 @@ class EventCell: UICollectionViewCell {
             eventNameLabel.topAnchor.constraint(equalTo: eventImageView.topAnchor, constant: 8),
             eventNameLabel.leadingAnchor.constraint(equalTo: eventImageView.leadingAnchor, constant: padding),
             eventNameLabel.trailingAnchor.constraint(equalTo: eventImageView.trailingAnchor, constant: -padding),
-            eventNameLabel.heightAnchor.constraint(equalToConstant: 20)
+            eventNameLabel.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
     
