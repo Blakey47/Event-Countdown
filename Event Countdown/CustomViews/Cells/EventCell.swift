@@ -32,13 +32,12 @@ class EventCell: UICollectionViewCell {
     }
     
     func set(event: Event) {
-        eventNameLabel.text = event.name
-        eventDistriptionLabel.text = event.description
+        eventNameLabel.text = event.eventName
         
         // Setting the Due Date
-        let eventDate = event.date
+        let eventDate = event.eventCountdownDay
         let calendar = Calendar.current
-        eventCountdownDate = calendar.dateComponents([ .year, .month, .day, .hour, .minute, .second], from: eventDate as Date)
+        eventCountdownDate = calendar.dateComponents([ .year, .month, .day, .hour, .minute, .second], from: eventDate as! Date)
         eventDueDate.text = "Year: \(eventCountdownDate.year ?? 0) Month: \(eventCountdownDate.month ?? 0) Day: \(eventCountdownDate.day ?? 0) Hour: \(eventCountdownDate.hour ?? 0) Minute: \(eventCountdownDate.minute ?? 0)"
     }
     

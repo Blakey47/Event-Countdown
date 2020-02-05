@@ -9,7 +9,10 @@
 import UIKit
 
 struct Event: Hashable {
-    var name: String
-    var description: String
-    var date: Date
+    
+    var eventName: String
+    var eventCountdownDay: Date
+    var eventBackgroundImage: UIImage
+    var eventCountdownTime: Date
+    
 }

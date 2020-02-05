@@ -8,13 +8,18 @@
 
 import UIKit
 
+protocol EventDetailsVCDelegate {
+    func didTapSaveDetailsButton(event: Event)
+}
+
 class EventDetailsVC: UIViewController {
+    
+    var eventDetailsVCDelegate: EventDetailsVCDelegate!
 
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var timePicker: UIDatePicker!
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +51,17 @@ class EventDetailsVC: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        dismiss(animated: true)
+        print("Save button tapped")
+        let dayCount = datePicker.date
+        let timeCount = timePicker.date
+        let event = Event(eventName: eventNameTextField.text ?? "Event Name", eventCountdownDay: dayCount, eventBackgroundImage: UIImage(named: "wedding")!, eventCountdownTime: timeCount)
+        dismiss(animated: true) {
+            self.eventDetailsVCDelegate?.didTapSaveDetailsButton(event: event)
+        }
     }
     
 }
+
+
+
+

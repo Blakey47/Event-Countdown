@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EventCountdownVCDelegate: class{
+    func didAddEvent(event: Event)
+}
+
 class EventCountdownVC: UIViewController {
     
     enum Section {
@@ -49,9 +53,8 @@ class EventCountdownVC: UIViewController {
     }
     
     @IBAction func addButtonDidTap(_ sender: Any) {
-        let newEvent = Event(name: "Ste and Amy's Wedding", description: "Wedding Time", date: Date())
-        events.append(newEvent)
-        updateData()
+        #warning("Please update UI")
+
     }
     
     func configureEmptyCollectionViewLabel() {
@@ -128,3 +131,12 @@ class EventCountdownVC: UIViewController {
 
 }
 
+
+// MARK: Delegate Impl
+
+extension EventCountdownVC: EventCountdownVCDelegate {
+    func didAddEvent(event: Event) {
+        events.append(event)
+        updateData()
+    }
+}
