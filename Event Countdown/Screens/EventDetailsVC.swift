@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol EventDetailsVCDelegate {
+protocol EventDetailsVCDelegate: class {
     func didTapSaveDetailsButton(event: Event)
 }
 
 class EventDetailsVC: UIViewController {
     
-    var eventDetailsVCDelegate: EventDetailsVCDelegate!
-
+    weak var eventDetailsVCDelegate: EventDetailsVCDelegate!
+    
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var timePicker: UIDatePicker!
     @IBOutlet weak var eventNameTextField: UITextField!
@@ -27,9 +27,15 @@ class EventDetailsVC: UIViewController {
     }
     
     func configure() {
+        createDismissKeyboardTapGesture()
         datePicker.setValue(UIColor.white, forKey: "textColor")
         timePicker.setValue(UIColor.white, forKey: "textColor")
         saveButton.layer.cornerRadius = 10
+    }
+    
+    func createDismissKeyboardTapGesture() {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
     }
 
     @IBAction func AllDaySelecterToggled(_ sender: Any) {
@@ -51,17 +57,18 @@ class EventDetailsVC: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        print("Save button tapped")
         let dayCount = datePicker.date
         let timeCount = timePicker.date
-        let event = Event(eventName: eventNameTextField.text ?? "Event Name", eventCountdownDay: dayCount, eventBackgroundImage: UIImage(named: "wedding")!, eventCountdownTime: timeCount)
+        let event = Event(eventName: eventNameTextField.text ?? "Event Name", eventCountdownDay: dayCount, eventCountdownTime: timeCount)
         dismiss(animated: true) {
             self.eventDetailsVCDelegate?.didTapSaveDetailsButton(event: event)
         }
     }
     
+    @IBAction func eventNameFinishEditing(_ sender: UITextField) {
+        sender.resignFirstResponder()
+    }
 }
-
 
 
 

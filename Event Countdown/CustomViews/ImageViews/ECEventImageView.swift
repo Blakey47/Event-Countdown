@@ -24,7 +24,7 @@ class ECEventImageView: UIImageView {
     private func configure() {
         layer.cornerRadius = 10
         clipsToBounds = true
-        image = placeholderImage
+//        image = placeholderImage
         translatesAutoresizingMaskIntoConstraints = false
         contentMode = .scaleAspectFill
     }

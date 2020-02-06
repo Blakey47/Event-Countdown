@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol EventCountdownVCDelegate: class{
-    func didAddEvent(event: Event)
-}
-
 class EventCountdownVC: UIViewController {
     
     enum Section {
@@ -26,13 +22,16 @@ class EventCountdownVC: UIViewController {
     
     let emptyCollectionViewLabel: UILabel = {
         let label = UILabel()
+        label.isHidden = true
         return label
     }()
     
     let addEventView = UIView()
+    let message = "You have no Countdowns yet. Please add one."
+    
     
     var events: [Event] = []
-    
+    var emptyStateView = UIView()
     
     
     // MARK: ViewDidLoad
@@ -40,8 +39,10 @@ class EventCountdownVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        
+        
+        emptyStateView = showEmptyStateView(with: message, in: self.view)
     }
-    
     
     
     // MARK: Configure UI
@@ -53,27 +54,15 @@ class EventCountdownVC: UIViewController {
     }
     
     @IBAction func addButtonDidTap(_ sender: Any) {
-        #warning("Please update UI")
+        DispatchQueue.main.async {self.emptyStateView.transform = CGAffineTransform(translationX: 300, y: 0)}
+        
+        
+        let eventOverviewVC = storyboard?.instantiateViewController(identifier: "EventOverviewVC") as! EventOverviewVC
+        eventOverviewVC.eventOverviewVCDelegate = self
+        present(eventOverviewVC, animated: true, completion: nil)
+    }
 
-    }
-    
-    func configureEmptyCollectionViewLabel() {
-        view.addSubview(emptyCollectionViewLabel)
-        emptyCollectionViewLabel.text = "You have not created an Event yet. Please add an Event."
-        emptyCollectionViewLabel.textAlignment = .center
-        emptyCollectionViewLabel.textColor = .white
-        emptyCollectionViewLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        emptyCollectionViewLabel.lineBreakMode = .byWordWrapping
-        emptyCollectionViewLabel.numberOfLines = 0
-        emptyCollectionViewLabel.translatesAutoresizingMaskIntoConstraints = false
-                
-        NSLayoutConstraint.activate([
-            emptyCollectionViewLabel.topAnchor.constraint(equalTo: myEventsLabel.bottomAnchor, constant: 100),
-            emptyCollectionViewLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            emptyCollectionViewLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            emptyCollectionViewLabel.heightAnchor.constraint(equalToConstant: 60)
-        ])
-    }
+    func configureEmptyCollectionViewLabel() {}
     
     func configureCollectionView() {
         // Initial CollectionView
@@ -123,20 +112,30 @@ class EventCountdownVC: UIViewController {
         DispatchQueue.main.async {
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }
+        configureEmptyCollectionViewLabel()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
+    
 
 }
 
 
 // MARK: Delegate Impl
 
-extension EventCountdownVC: EventCountdownVCDelegate {
-    func didAddEvent(event: Event) {
+extension EventCountdownVC: EventOverviewVCDelegate {
+    
+    func didTapSaveButton(event: Event) {
         events.append(event)
         updateData()
     }
+    
+    func didTapCloseButton() {
+        if events.isEmpty {
+            emptyStateView.transform = .identity
+        }
+    }
+    
 }

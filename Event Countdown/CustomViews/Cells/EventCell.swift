@@ -33,11 +33,12 @@ class EventCell: UICollectionViewCell {
     
     func set(event: Event) {
         eventNameLabel.text = event.eventName
+        eventImageView.image = event.eventBackgroundImage
         
         // Setting the Due Date
         let eventDate = event.eventCountdownDay
         let calendar = Calendar.current
-        eventCountdownDate = calendar.dateComponents([ .year, .month, .day, .hour, .minute, .second], from: eventDate as! Date)
+        eventCountdownDate = calendar.dateComponents([ .year, .month, .day, .hour, .minute, .second], from: eventDate )
         eventDueDate.text = "Year: \(eventCountdownDate.year ?? 0) Month: \(eventCountdownDate.month ?? 0) Day: \(eventCountdownDate.day ?? 0) Hour: \(eventCountdownDate.hour ?? 0) Minute: \(eventCountdownDate.minute ?? 0)"
     }
     
@@ -72,7 +73,7 @@ class EventCell: UICollectionViewCell {
             return "\(timeLeft.second ?? 0) seconds to go"
         } else {
             timer.invalidate()
-            return "Now"
+            return "Today"
         }
     }
     

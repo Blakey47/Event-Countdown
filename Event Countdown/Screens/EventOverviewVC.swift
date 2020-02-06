@@ -10,6 +10,7 @@ import UIKit
 
 protocol EventOverviewVCDelegate: class {
     func didTapSaveButton(event: Event)
+    func didTapCloseButton()
 }
 
 class EventOverviewVC: UIViewController {
@@ -17,16 +18,25 @@ class EventOverviewVC: UIViewController {
     @IBOutlet weak var eventBackgroundImage: UIImageView!
     @IBOutlet weak var eventNameButton: UIButton!
     @IBOutlet weak var eventCountdownLabel: UILabel!
+    @IBOutlet weak var saveButton: UIButton!
     
+    weak var eventOverviewVCDelegate: EventOverviewVCDelegate!
+    var eventCountdownDay = Date()
+    var eventCountdownTime = Date()
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        configure()
+    }
+    
+    func configure() {
+        saveButton.isUserInteractionEnabled = false
+        saveButton.setTitleColor(.systemGray, for: .normal)
     }
 
     @IBAction func eventCloseButtonTapped(_ sender: Any) {
-        dismiss(animated: true) {
-            
-        }
+        eventOverviewVCDelegate.didTapCloseButton()
+        dismiss(animated: true)
     }
     
     @IBAction func changeImageButtonTapped(_ sender: Any) {
@@ -34,8 +44,10 @@ class EventOverviewVC: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        
-        
+        let image = eventBackgroundImage.image!
+        let event = Event(eventName: eventNameButton.currentTitle ?? "Event Name", eventCountdownDay: eventCountdownDay, eventBackgroundImage: image, eventCountdownTime: eventCountdownTime)
+        eventOverviewVCDelegate.didTapSaveButton(event: event)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func eventNameButtonTapped(_ sender: Any) {
@@ -80,7 +92,15 @@ extension EventOverviewVC: UIImagePickerControllerDelegate, UINavigationControll
 
 extension EventOverviewVC: EventDetailsVCDelegate {
     func didTapSaveDetailsButton(event: Event) {
+        guard let countdownTime = event.eventCountdownTime else {return}
+        
+        eventCountdownDay = event.eventCountdownDay
+        eventCountdownTime = countdownTime
+        
+        saveButton.isUserInteractionEnabled = true
+        
         DispatchQueue.main.async {
+            self.saveButton.setTitleColor(.white, for: .normal)
             self.eventNameButton.setTitle(event.eventName, for: .normal)
         }
     }

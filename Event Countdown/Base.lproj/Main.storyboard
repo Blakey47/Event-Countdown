@@ -27,7 +27,6 @@
                                 </state>
                                 <connections>
                                     <action selector="addButtonDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M6x-J8-HZ2"/>
-                                    <segue destination="mLw-KM-JBv" kind="presentation" id="WyK-jX-TIb"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxn-fk-Mbu">
@@ -116,7 +115,10 @@
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert" returnKeyType="done"/>
+                                        <connections>
+                                            <action selector="eventNameFinishEditing:" destination="0uQ-AP-eDk" eventType="primaryActionTriggered" id="sSU-Hx-prp"/>
+                                        </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rVO-Yq-J82" userLabel="Pick Your Date View">
                                         <rect key="frame" x="0.0" y="107" width="414" height="25"/>
@@ -260,9 +262,9 @@
         <!--Event OverviewVC-->
         <scene sceneID="85H-cq-1L4">
             <objects>
-                <viewController id="mLw-KM-JBv" customClass="EventOverviewVC" customModule="Event_Countdown" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventOverviewVC" id="mLw-KM-JBv" customClass="EventOverviewVC" customModule="Event_Countdown" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TUt-VP-l8W">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wedding" translatesAutoresizingMaskIntoConstraints="NO" id="EDY-Pa-8Ev">
@@ -270,7 +272,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In X days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sy6-AS-oMD">
-                                <rect key="frame" x="20" y="547" width="374" height="30"/>
+                                <rect key="frame" x="20" y="601" width="374" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="13u-bQ-0eK"/>
                                 </constraints>
@@ -279,7 +281,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W4b-ta-1yc">
-                                <rect key="frame" x="20" y="24" width="20" height="16"/>
+                                <rect key="frame" x="20" y="68" width="20" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="3zG-jh-H4J"/>
                                     <constraint firstAttribute="height" constant="20" id="9jJ-PG-zoo"/>
@@ -294,7 +296,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OI7-oS-DAP">
-                                <rect key="frame" x="20" y="494" width="374" height="45"/>
+                                <rect key="frame" x="20" y="548" width="374" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="Ebt-ir-TpE"/>
                                 </constraints>
@@ -307,7 +309,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hno-ca-XAK">
-                                <rect key="frame" x="20" y="776" width="108" height="32"/>
+                                <rect key="frame" x="20" y="830" width="108" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="108" id="jfr-xQ-g10"/>
                                     <constraint firstAttribute="height" constant="32" id="wC1-xe-ldl"/>
@@ -321,7 +323,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDq-Nx-HQS">
-                                <rect key="frame" x="354" y="17" width="34" height="30"/>
+                                <rect key="frame" x="354" y="61" width="34" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="eK2-cw-5nx"/>
                                     <constraint firstAttribute="width" constant="34" id="gkd-F9-rbP"/>
@@ -355,7 +357,9 @@
                     <navigationItem key="navigationItem" id="GaP-0i-6XD"/>
                     <connections>
                         <outlet property="eventBackgroundImage" destination="EDY-Pa-8Ev" id="4yJ-im-OE2"/>
+                        <outlet property="eventCountdownLabel" destination="sy6-AS-oMD" id="Ej5-My-Tmj"/>
                         <outlet property="eventNameButton" destination="OI7-oS-DAP" id="i4Q-do-MQ2"/>
+                        <outlet property="saveButton" destination="IDq-Nx-HQS" id="n6C-0d-4KZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DzI-yp-dJn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

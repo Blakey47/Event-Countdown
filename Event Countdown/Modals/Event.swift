@@ -12,7 +12,20 @@ struct Event: Hashable {
     
     var eventName: String
     var eventCountdownDay: Date
-    var eventBackgroundImage: UIImage
-    var eventCountdownTime: Date
+    var eventBackgroundImage: UIImage?
+    var eventCountdownTime: Date?
+    
+    init(eventName: String, eventCountdownDay: Date, eventCountdownTime: Date) {
+        self.eventName = eventName
+        self.eventCountdownDay = eventCountdownDay
+        self.eventCountdownTime = eventCountdownTime
+    }
+    
+    init(eventName: String, eventCountdownDay: Date, eventBackgroundImage: UIImage, eventCountdownTime: Date) {
+        self.eventName = eventName
+        self.eventCountdownDay = eventCountdownDay
+        self.eventBackgroundImage = eventBackgroundImage
+        self.eventCountdownTime = eventCountdownTime
+    }
     
 }
