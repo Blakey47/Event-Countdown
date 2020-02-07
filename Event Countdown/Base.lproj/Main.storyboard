@@ -90,6 +90,9 @@
                                 <state key="normal" title="Save">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveButtonTapped:" destination="ayF-co-ZVJ" eventType="touchUpInside" id="GiU-S3-U2m"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adE-4x-Ou7">
                                 <rect key="frame" x="20" y="66" width="20" height="15.5"/>
@@ -101,6 +104,9 @@
                                 <state key="normal" backgroundImage="xmark" catalog="system">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="ayF-co-ZVJ" eventType="touchUpInside" id="l8X-7k-s7a"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MTS-xw-X7S">
                                 <rect key="frame" x="20" y="592" width="374" height="45"/>
@@ -112,6 +118,9 @@
                                 <state key="normal" title="Event Name">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="timeLeftTapped:" destination="ayF-co-ZVJ" eventType="touchUpInside" id="gdx-Hi-9Ry"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSK-HC-3d3">
                                 <rect key="frame" x="20" y="807" width="108" height="32"/>
@@ -125,6 +134,7 @@
                                 </state>
                                 <connections>
                                     <action selector="changeImageButtonTapped:" destination="mLw-KM-JBv" eventType="touchUpInside" id="tld-K3-gXb"/>
+                                    <action selector="changeImageTapped:" destination="ayF-co-ZVJ" eventType="touchUpInside" id="6NG-Bd-cra"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Kf-Eu-m1f">
@@ -136,6 +146,9 @@
                                 <state key="normal" title="Event Name">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="eventNameTapped:" destination="ayF-co-ZVJ" eventType="touchUpInside" id="FG1-9y-fsx"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
@@ -159,6 +172,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HWI-ja-2zO"/>
                     </view>
+                    <connections>
+                        <outlet property="eventBackgroundImage" destination="ms9-b1-EUd" id="ZtW-iV-yvd"/>
+                        <outlet property="eventName" destination="8Kf-Eu-m1f" id="imh-7f-lzR"/>
+                        <outlet property="saveButton" destination="aD8-Du-ZFz" id="nAG-Cp-Akl"/>
+                        <outlet property="timeLeft" destination="MTS-xw-X7S" id="hze-XW-hNR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ShE-QA-nLE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

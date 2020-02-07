@@ -134,6 +134,7 @@ extension EventCountdownVC: EventOverviewVCDelegate {
     }
     
     func didTapCloseButton() {
+        print("Closed")
         if events.isEmpty {
             emptyStateView.transform = .identity
         }
@@ -148,9 +149,21 @@ extension EventCountdownVC: UICollectionViewDelegate  {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let event = events[indexPath.item]
-        
         let eventViewController = storyboard?.instantiateViewController(identifier: "EventViewController") as! EventViewController
+        
+        eventViewController.event = event
+        eventViewController.eventPosition = indexPath.item
+        eventViewController.eventViewControllerDelegate = self
+        
         present(eventViewController, animated: true)
     }
     
+}
+
+
+extension EventCountdownVC: EventViewControllerDelegate {
+    func didTapSaveEditButton(event: Event, position: Int) {
+        events[position] = event
+        updateData()
+    }
 }
