@@ -54,7 +54,7 @@ class EventCountdownVC: UIViewController {
     }
     
     @IBAction func addButtonDidTap(_ sender: Any) {
-        DispatchQueue.main.async {self.emptyStateView.transform = CGAffineTransform(translationX: 300, y: 0)}
+        DispatchQueue.main.async {self.emptyStateView.transform = CGAffineTransform(translationX: 1000, y: 0)}
         
         
         let eventOverviewVC = storyboard?.instantiateViewController(identifier: "EventOverviewVC") as! EventOverviewVC
@@ -68,6 +68,7 @@ class EventCountdownVC: UIViewController {
         // Initial CollectionView
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createSingleColumnFlowLayout())
         view.addSubview(collectionView)
+        collectionView.delegate = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
         collectionView.backgroundColor = .clear
@@ -136,6 +137,20 @@ extension EventCountdownVC: EventOverviewVCDelegate {
         if events.isEmpty {
             emptyStateView.transform = .identity
         }
+    }
+    
+}
+
+
+// MARK: CollectionView Delegate
+
+extension EventCountdownVC: UICollectionViewDelegate  {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let event = events[indexPath.item]
+        
+        let eventViewController = storyboard?.instantiateViewController(identifier: "EventViewController") as! EventViewController
+        present(eventViewController, animated: true)
     }
     
 }

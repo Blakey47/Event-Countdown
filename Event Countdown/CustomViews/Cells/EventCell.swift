@@ -18,7 +18,9 @@ class EventCell: UICollectionViewCell {
     var eventDueDate = UILabel()
     var eventImageView = ECEventImageView(frame: .zero)
     
+    let deleteButton = UIButton()
     let padding: CGFloat = 20
+    
     var timer: Timer!
     
     override init(frame: CGRect) {
@@ -81,6 +83,7 @@ class EventCell: UICollectionViewCell {
         configureEventImageView()
         configureEventNameLabel()
         configureEventCountdownLabel()
+//        configureDeleteButton()
     }
     
     private func configureEventImageView() {
@@ -116,16 +119,17 @@ class EventCell: UICollectionViewCell {
         ])
     }
     
-//    private func configureEventDescriptionLabel() {
-//        eventImageView.addSubview(eventDistriptionLabel)
-//
-//        eventDistriptionLabel.backgroundColor = .black
-//
-//        NSLayoutConstraint.activate([
-//            eventDistriptionLabel.topAnchor.constraint(equalTo: eventNameLabel.bottomAnchor, constant: 10),
-//            eventDistriptionLabel.leadingAnchor.constraint(equalTo: eventImageView.leadingAnchor, constant: padding),
-//            eventDistriptionLabel.trailingAnchor.constraint(equalTo: eventImageView.trailingAnchor, constant: -padding),
-//            eventDistriptionLabel.heightAnchor.constraint(equalToConstant: 50)
-//        ])
-//    }
+    private func configureDeleteButton() {
+        addSubview(deleteButton)
+        
+        deleteButton.setBackgroundImage(UIImage(systemName: SFSymbols.close), for: .normal)
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            deleteButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            deleteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+            deleteButton.heightAnchor.constraint(equalToConstant: 20),
+            deleteButton.widthAnchor.constraint(equalToConstant: 20)
+        ])
+    }
 }
