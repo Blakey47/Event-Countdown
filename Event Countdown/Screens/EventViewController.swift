@@ -46,6 +46,7 @@ class EventViewController: UIViewController {
     }
     
     @IBAction func eventNameTapped(_ sender: Any) {
+        
     }
     
     @IBAction func timeLeftTapped(_ sender: Any) {
@@ -58,16 +59,12 @@ class EventViewController: UIViewController {
     private func configure() {
         eventName.setTitle(event.eventName, for: .normal)
         eventBackgroundImage.image = event.eventBackgroundImage
-    }
-    
-    private func setDate(event: Event) {
-        eventName.setTitle(event.eventName, for: .normal)
-        eventBackgroundImage.image = event.eventBackgroundImage
         
         // Setting the Due Date
         let eventDate = event.eventCountdownDay
         let calendar = Calendar.current
         countdownComponents = calendar.dateComponents([ .year, .month, .day, .hour, .minute, .second], from: eventDate )
+        
     }
     
     @objc func runTimer() {
@@ -122,10 +119,12 @@ extension EventViewController: UIImagePickerControllerDelegate, UINavigationCont
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             DispatchQueue.main.async {
                 self.eventBackgroundImage.image = editedImage
+                self.event.eventBackgroundImage = editedImage
             }
         } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             DispatchQueue.main.async {
                 self.eventBackgroundImage.image = originalImage
+                self.event.eventBackgroundImage = originalImage
             }
         }
         

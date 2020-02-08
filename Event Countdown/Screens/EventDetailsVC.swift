@@ -21,6 +21,8 @@ class EventDetailsVC: UIViewController {
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     
+    var event: Event!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -31,6 +33,11 @@ class EventDetailsVC: UIViewController {
         datePicker.setValue(UIColor.white, forKey: "textColor")
         timePicker.setValue(UIColor.white, forKey: "textColor")
         saveButton.layer.cornerRadius = 10
+        
+        if event != nil {
+            eventNameTextField.text = event.eventName
+            datePicker.date = event.eventCountdownDay
+        }
     }
     
     func createDismissKeyboardTapGesture() {

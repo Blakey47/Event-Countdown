@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		024DDA1523EEDD6500EC1366 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024DDA1423EEDD6500EC1366 /* Date+Ext.swift */; };
 		024E883E23EC54AC008EBFAB /* ECEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024E883D23EC54AC008EBFAB /* ECEmptyStateView.swift */; };
 		024E884123EC5573008EBFAB /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024E884023EC5573008EBFAB /* UIViewController+Ext.swift */; };
 		024E884423EC76E7008EBFAB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024E884323EC76E7008EBFAB /* Constants.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		024DDA1423EEDD6500EC1366 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		024E883D23EC54AC008EBFAB /* ECEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECEmptyStateView.swift; sourceTree = "<group>"; };
 		024E884023EC5573008EBFAB /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		024E884323EC76E7008EBFAB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				024E884023EC5573008EBFAB /* UIViewController+Ext.swift */,
+				024DDA1423EEDD6500EC1366 /* Date+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				024E884423EC76E7008EBFAB /* Constants.swift in Sources */,
 				028FCE6D23E97653004194DF /* EventDetailsVC.swift in Sources */,
 				0295241C23ED84C8003EF2A2 /* EventViewController.swift in Sources */,
+				024DDA1523EEDD6500EC1366 /* Date+Ext.swift in Sources */,
 				028FCE6123E835A7004194DF /* ECEventImageView.swift in Sources */,
 				028FCE4923E310A2004194DF /* SceneDelegate.swift in Sources */,
 				028FCE5F23E8344E004194DF /* EventCell.swift in Sources */,

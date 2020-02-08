@@ -115,7 +115,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="x4A-5G-4OK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                <state key="normal" title="Event Name">
+                                <state key="normal" title="In">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>

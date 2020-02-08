@@ -10,6 +10,7 @@ import UIKit
 
 protocol EventOverviewVCDelegate: class {
     func didTapSaveButton(event: Event)
+    func didTapSaveEditButton(event: Event, position: Int)
     func didTapCloseButton()
 }
 
@@ -23,6 +24,9 @@ class EventOverviewVC: UIViewController {
     weak var eventOverviewVCDelegate: EventOverviewVCDelegate!
     var eventCountdownDay = Date()
     var eventCountdownTime = Date()
+    
+    var event: Event!
+    var eventPosition: Int?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +36,11 @@ class EventOverviewVC: UIViewController {
     func configure() {
         saveButton.isUserInteractionEnabled = false
         saveButton.setTitleColor(.systemGray, for: .normal)
+        
+        if event != nil {
+            eventNameButton.setTitle(event.eventName, for: .normal)
+            eventBackgroundImage.image = event.eventBackgroundImage
+        }
     }
 
     @IBAction func eventCloseButtonTapped(_ sender: Any) {
@@ -46,14 +55,29 @@ class EventOverviewVC: UIViewController {
     @IBAction func saveButtonTapped(_ sender: Any) {
         let image = eventBackgroundImage.image!
         let event = Event(eventName: eventNameButton.currentTitle ?? "Event Name", eventCountdownDay: eventCountdownDay, eventBackgroundImage: image, eventCountdownTime: eventCountdownTime)
-        eventOverviewVCDelegate.didTapSaveButton(event: event)
+                
+        if let position = eventPosition {
+            eventOverviewVCDelegate.didTapSaveEditButton(event: event, position: position)
+        } else {
+            eventOverviewVCDelegate.didTapSaveButton(event: event)
+        }
+        
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func eventNameButtonTapped(_ sender: Any) {
         let eventDetailsVC = storyboard?.instantiateViewController(identifier: "EventDetailsVC") as! EventDetailsVC
+        if event != nil {eventDetailsVC.event = event}
         eventDetailsVC.eventDetailsVCDelegate = self
         present(eventDetailsVC, animated: true, completion: nil)
+    }
+    
+    private func saveButtonInteractable() {
+        saveButton.isUserInteractionEnabled = true
+        
+        DispatchQueue.main.async {
+            self.saveButton.setTitleColor(.white, for: .normal)
+        }
     }
     
 }
@@ -82,7 +106,7 @@ extension EventOverviewVC: UIImagePickerControllerDelegate, UINavigationControll
                 self.eventBackgroundImage.image = originalImage
             }
         }
-        
+        saveButtonInteractable()
         dismiss(animated: true, completion: nil)
     }
 }
@@ -97,10 +121,9 @@ extension EventOverviewVC: EventDetailsVCDelegate {
         eventCountdownDay = event.eventCountdownDay
         eventCountdownTime = countdownTime
         
-        saveButton.isUserInteractionEnabled = true
+        saveButtonInteractable()
         
         DispatchQueue.main.async {
-            self.saveButton.setTitleColor(.white, for: .normal)
             self.eventNameButton.setTitle(event.eventName, for: .normal)
         }
     }

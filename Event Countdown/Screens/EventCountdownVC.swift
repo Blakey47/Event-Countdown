@@ -140,6 +140,11 @@ extension EventCountdownVC: EventOverviewVCDelegate {
         }
     }
     
+    func didTapSaveEditButton(event: Event, position: Int) {
+        events[position] = event
+        updateData()
+    }
+    
 }
 
 
@@ -149,21 +154,23 @@ extension EventCountdownVC: UICollectionViewDelegate  {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let event = events[indexPath.item]
-        let eventViewController = storyboard?.instantiateViewController(identifier: "EventViewController") as! EventViewController
+        let eventOverviewVC = storyboard?.instantiateViewController(identifier: "EventOverviewVC") as! EventOverviewVC
         
-        eventViewController.event = event
-        eventViewController.eventPosition = indexPath.item
-        eventViewController.eventViewControllerDelegate = self
+//        let eventViewController = storyboard?.instantiateViewController(identifier: "EventViewController") as! EventViewController
+//
+//        eventViewController.event = event
+//        eventViewController.eventPosition = indexPath.item
+//        eventViewController.eventViewControllerDelegate = self
         
-        present(eventViewController, animated: true)
+        eventOverviewVC.event = event
+        eventOverviewVC.eventPosition = indexPath.item
+        eventOverviewVC.eventOverviewVCDelegate = self
+        present(eventOverviewVC, animated: true)
     }
     
 }
 
 
-extension EventCountdownVC: EventViewControllerDelegate {
-    func didTapSaveEditButton(event: Event, position: Int) {
-        events[position] = event
-        updateData()
-    }
-}
+//extension EventCountdownVC: EventViewControllerDelegate {
+//
+//}
