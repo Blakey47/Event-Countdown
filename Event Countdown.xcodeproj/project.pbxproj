@@ -61,6 +61,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		024DDA1623EEFF3600EC1366 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		024E883C23EC548D008EBFAB /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +112,7 @@
 		028FCE4523E310A2004194DF /* Event Countdown */ = {
 			isa = PBXGroup;
 			children = (
+				024DDA1623EEFF3600EC1366 /* Managers */,
 				024E884223EC76D3008EBFAB /* Utilities */,
 				024E883F23EC5568008EBFAB /* Extensions */,
 				028FCE6423E87146004194DF /* CustomViews */,

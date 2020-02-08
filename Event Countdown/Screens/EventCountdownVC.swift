@@ -145,6 +145,14 @@ extension EventCountdownVC: EventOverviewVCDelegate {
         updateData()
     }
     
+    func didTapDeleteButton(position: Int) {
+        events.remove(at: position)
+        updateData()
+        if events.isEmpty {
+            emptyStateView.transform = .identity
+        }
+    }
+    
 }
 
 
@@ -156,21 +164,14 @@ extension EventCountdownVC: UICollectionViewDelegate  {
         let event = events[indexPath.item]
         let eventOverviewVC = storyboard?.instantiateViewController(identifier: "EventOverviewVC") as! EventOverviewVC
         
-//        let eventViewController = storyboard?.instantiateViewController(identifier: "EventViewController") as! EventViewController
-//
-//        eventViewController.event = event
-//        eventViewController.eventPosition = indexPath.item
-//        eventViewController.eventViewControllerDelegate = self
-        
         eventOverviewVC.event = event
         eventOverviewVC.eventPosition = indexPath.item
+        eventOverviewVC.eventHasValue = true
         eventOverviewVC.eventOverviewVCDelegate = self
         present(eventOverviewVC, animated: true)
     }
     
+    
+    
 }
 
-
-//extension EventCountdownVC: EventViewControllerDelegate {
-//
-//}

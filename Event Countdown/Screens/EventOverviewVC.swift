@@ -11,6 +11,7 @@ import UIKit
 protocol EventOverviewVCDelegate: class {
     func didTapSaveButton(event: Event)
     func didTapSaveEditButton(event: Event, position: Int)
+    func didTapDeleteButton(position: Int)
     func didTapCloseButton()
 }
 
@@ -20,6 +21,7 @@ class EventOverviewVC: UIViewController {
     @IBOutlet weak var eventNameButton: UIButton!
     @IBOutlet weak var eventCountdownLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     
     weak var eventOverviewVCDelegate: EventOverviewVCDelegate!
     var eventCountdownDay = Date()
@@ -27,6 +29,7 @@ class EventOverviewVC: UIViewController {
     
     var event: Event!
     var eventPosition: Int?
+    var eventHasValue = false
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +39,12 @@ class EventOverviewVC: UIViewController {
     func configure() {
         saveButton.isUserInteractionEnabled = false
         saveButton.setTitleColor(.systemGray, for: .normal)
+        
+        if eventHasValue {
+            deleteButton.isHidden = false
+        } else {
+            deleteButton.isHidden = true
+        }
         
         if event != nil {
             eventNameButton.setTitle(event.eventName, for: .normal)
@@ -63,6 +72,16 @@ class EventOverviewVC: UIViewController {
         }
         
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func deleteButtonTapped(_ sender: Any) {
+        if let position = eventPosition {
+            eventOverviewVCDelegate.didTapDeleteButton(position: position)
+            dismiss(animated: true, completion: nil)
+        } else {
+            print("Nothing to delete")
+        }
+        
     }
     
     @IBAction func eventNameButtonTapped(_ sender: Any) {
