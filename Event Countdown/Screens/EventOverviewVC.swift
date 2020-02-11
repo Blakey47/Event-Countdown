@@ -35,7 +35,7 @@ class EventOverviewVC: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        managedObjectContext = CoreDataManager.shared.persistentContainer.viewContext
         configure()
     }
     

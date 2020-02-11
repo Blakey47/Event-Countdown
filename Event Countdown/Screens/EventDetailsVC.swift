@@ -27,7 +27,7 @@ class EventDetailsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        managedObjectContext = CoreDataManager.shared.persistentContainer.viewContext
         configure()
     }
     
@@ -67,6 +67,18 @@ class EventDetailsVC: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        if event == nil {
+            createEvent()
+        } else {
+            saveChanges()
+        }
+    }
+    
+    @IBAction func eventNameFinishEditing(_ sender: UITextField) {
+        sender.resignFirstResponder()
+    }
+    
+    private func createEvent(){
         let dayCount = datePicker.date
         let timeCount = timePicker.date
         let event = Event(context: managedObjectContext)
@@ -78,8 +90,15 @@ class EventDetailsVC: UIViewController {
         }
     }
     
-    @IBAction func eventNameFinishEditing(_ sender: UITextField) {
-        sender.resignFirstResponder()
+    private func saveChanges() {
+        let dayCount = datePicker.date
+        let timeCount = timePicker.date
+        event.eventName = eventNameTextField.text
+        event.eventCountdownDay = dayCount
+        event.eventCountdownTime = timeCount
+        dismiss(animated: true) {
+            self.eventDetailsVCDelegate?.didTapSaveDetailsButton(event: self.event)
+        }
     }
 }
 

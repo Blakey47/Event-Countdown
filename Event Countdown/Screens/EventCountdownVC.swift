@@ -41,7 +41,7 @@ class EventCountdownVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        managedObjectContext = CoreDataManager.shared.persistentContainer.viewContext
         self.events = CoreDataManager.shared.fetchEvents()
         
         configure()
@@ -168,6 +168,7 @@ extension EventCountdownVC: EventOverviewVCDelegate {
         if let managedItem = events[position] as? NSManagedObject {
             managedObjectContext.delete(managedItem)
         }
+        events.remove(at: position)
         saveData()
         updateData()
         if events.isEmpty {
