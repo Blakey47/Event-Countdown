@@ -68,7 +68,9 @@ class EventCountdownVC: UIViewController {
 
     func configureEmptyCollectionViewLabel() {
         if events.isEmpty {
-            emptyStateView = showEmptyStateView(with: message, in: self.view)
+            DispatchQueue.main.async {
+                self.emptyStateView = self.showEmptyStateView(with: self.message, in: self.view)
+            }
         }
     }
     
@@ -145,23 +147,26 @@ class EventCountdownVC: UIViewController {
 extension EventCountdownVC: EventOverviewVCDelegate {
     
     func didTapSaveButton(event: Event) {
-        print(event)
         events.append(event)
-        saveData()
+        collectionView.reloadData()
         updateData()
+        saveData()
     }
     
     func didTapCloseButton() {
         print("Closed")
         if events.isEmpty {
-            emptyStateView.transform = .identity
+            DispatchQueue.main.async {
+                self.emptyStateView.transform = .identity
+            }
         }
     }
     
     func didTapSaveEditButton(event: Event, position: Int) {
         events[position] = event
-        saveData()
+        collectionView.reloadData()
         updateData()
+        saveData()
     }
     
     func didTapDeleteButton(position: Int) {
