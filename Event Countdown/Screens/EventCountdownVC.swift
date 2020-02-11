@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class EventCountdownVC: UIViewController {
     
@@ -29,28 +30,31 @@ class EventCountdownVC: UIViewController {
     let addEventView = UIView()
     let message = "You have no Countdowns yet. Please add one."
     
-    
     var events: [Event] = []
+    var event: Event!
     var emptyStateView = UIView()
+    var managedObjectContext: NSManagedObjectContext!
     
     
     // MARK: ViewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        self.events = CoreDataManager.shared.fetchEvents()
+        
         configure()
-        
-        
-        emptyStateView = showEmptyStateView(with: message, in: self.view)
     }
     
     
     // MARK: Configure UI
     
     func configure() {
-        configureEmptyCollectionViewLabel()
         configureCollectionView()
         configureDataSource()
+        updateData()
+        configureEmptyCollectionViewLabel()
     }
     
     @IBAction func addButtonDidTap(_ sender: Any) {
@@ -62,7 +66,11 @@ class EventCountdownVC: UIViewController {
         present(eventOverviewVC, animated: true, completion: nil)
     }
 
-    func configureEmptyCollectionViewLabel() {}
+    func configureEmptyCollectionViewLabel() {
+        if events.isEmpty {
+            emptyStateView = showEmptyStateView(with: message, in: self.view)
+        }
+    }
     
     func configureCollectionView() {
         // Initial CollectionView
@@ -116,6 +124,14 @@ class EventCountdownVC: UIViewController {
         configureEmptyCollectionViewLabel()
     }
     
+    func saveData() {
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print("Could not save data \(error.localizedDescription)")
+        }
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
@@ -129,7 +145,9 @@ class EventCountdownVC: UIViewController {
 extension EventCountdownVC: EventOverviewVCDelegate {
     
     func didTapSaveButton(event: Event) {
+        print(event)
         events.append(event)
+        saveData()
         updateData()
     }
     
@@ -142,11 +160,15 @@ extension EventCountdownVC: EventOverviewVCDelegate {
     
     func didTapSaveEditButton(event: Event, position: Int) {
         events[position] = event
+        saveData()
         updateData()
     }
     
     func didTapDeleteButton(position: Int) {
-        events.remove(at: position)
+        if let managedItem = events[position] as? NSManagedObject {
+            managedObjectContext.delete(managedItem)
+        }
+        saveData()
         updateData()
         if events.isEmpty {
             emptyStateView.transform = .identity
@@ -161,7 +183,7 @@ extension EventCountdownVC: EventOverviewVCDelegate {
 extension EventCountdownVC: UICollectionViewDelegate  {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let event = events[indexPath.item]
+        event = events[indexPath.item]
         let eventOverviewVC = storyboard?.instantiateViewController(identifier: "EventOverviewVC") as! EventOverviewVC
         
         eventOverviewVC.event = event

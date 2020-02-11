@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol EventOverviewVCDelegate: class {
     func didTapSaveButton(event: Event)
@@ -30,9 +31,11 @@ class EventOverviewVC: UIViewController {
     var event: Event!
     var eventPosition: Int?
     var eventHasValue = false
+    var managedObjectContext: NSManagedObjectContext!
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         configure()
     }
     
@@ -48,7 +51,9 @@ class EventOverviewVC: UIViewController {
         
         if event != nil {
             eventNameButton.setTitle(event.eventName, for: .normal)
-            eventBackgroundImage.image = event.eventBackgroundImage
+            if let backgroundImage = UIImage(data: event.eventBackgroundImage!) {
+                eventBackgroundImage.image = backgroundImage
+            }
         }
     }
 
@@ -62,8 +67,12 @@ class EventOverviewVC: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        let image = eventBackgroundImage.image!
-        let event = Event(eventName: eventNameButton.currentTitle ?? "Event Name", eventCountdownDay: eventCountdownDay, eventBackgroundImage: image, eventCountdownTime: eventCountdownTime)
+        let image = eventBackgroundImage.image!.pngData()
+        guard let currentTitle = eventNameButton.currentTitle else {return}
+        event.eventName = currentTitle
+        event.eventCountdownDay = eventCountdownDay
+        event.eventCountdownTime = eventCountdownTime
+        event.eventBackgroundImage = image
                 
         if let position = eventPosition {
             eventOverviewVCDelegate.didTapSaveEditButton(event: event, position: position)
@@ -137,9 +146,9 @@ extension EventOverviewVC: EventDetailsVCDelegate {
     func didTapSaveDetailsButton(event: Event) {
         guard let countdownTime = event.eventCountdownTime else {return}
         
-        eventCountdownDay = event.eventCountdownDay
+        eventCountdownDay = event.eventCountdownDay!
         eventCountdownTime = countdownTime
-        
+        self.event = event
         saveButtonInteractable()
         
         DispatchQueue.main.async {

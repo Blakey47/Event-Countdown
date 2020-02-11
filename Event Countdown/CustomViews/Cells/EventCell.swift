@@ -34,13 +34,19 @@ class EventCell: UICollectionViewCell {
     }
     
     func set(event: Event) {
+        guard let eventName = event.eventName else {return}
+        guard let backgroundImage = event.eventBackgroundImage else {return}
+        
+        print("Event name: \(eventName)")
+        print("Background Image: \(UIImage(data: backgroundImage)!)")
+        
         eventNameLabel.text = event.eventName
-        eventImageView.image = event.eventBackgroundImage
+        eventImageView.image = UIImage(data: backgroundImage)
         
         // Setting the Due Date
         let eventDate = event.eventCountdownDay
         let calendar = Calendar.current
-        eventCountdownDate = calendar.dateComponents([ .year, .month, .day, .hour, .minute, .second], from: eventDate )
+        eventCountdownDate = calendar.dateComponents([ .year, .month, .day, .hour, .minute, .second], from: eventDate! )
         eventDueDate.text = "Year: \(eventCountdownDate.year ?? 0) Month: \(eventCountdownDate.month ?? 0) Day: \(eventCountdownDate.day ?? 0) Hour: \(eventCountdownDate.hour ?? 0) Minute: \(eventCountdownDate.minute ?? 0)"
     }
     

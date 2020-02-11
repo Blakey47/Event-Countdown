@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol EventDetailsVCDelegate: class {
     func didTapSaveDetailsButton(event: Event)
@@ -22,9 +23,11 @@ class EventDetailsVC: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     
     var event: Event!
+    var managedObjectContext: NSManagedObjectContext!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         configure()
     }
     
@@ -36,7 +39,7 @@ class EventDetailsVC: UIViewController {
         
         if event != nil {
             eventNameTextField.text = event.eventName
-            datePicker.date = event.eventCountdownDay
+            datePicker.date = event.eventCountdownDay!
         }
     }
     
@@ -66,7 +69,10 @@ class EventDetailsVC: UIViewController {
     @IBAction func saveButtonTapped(_ sender: Any) {
         let dayCount = datePicker.date
         let timeCount = timePicker.date
-        let event = Event(eventName: eventNameTextField.text ?? "Event Name", eventCountdownDay: dayCount, eventCountdownTime: timeCount)
+        let event = Event(context: managedObjectContext)
+        event.eventName = eventNameTextField.text
+        event.eventCountdownDay = dayCount
+        event.eventCountdownTime = timeCount
         dismiss(animated: true) {
             self.eventDetailsVCDelegate?.didTapSaveDetailsButton(event: event)
         }
