@@ -68,10 +68,6 @@ class EventOverviewVC: UIViewController {
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         let image = eventBackgroundImage.image!.pngData()
-        guard let currentTitle = eventNameButton.currentTitle else {return}
-        event.eventName = currentTitle
-        event.eventCountdownDay = eventCountdownDay
-        event.eventCountdownTime = eventCountdownTime
         event.eventBackgroundImage = image
                 
         if let position = eventPosition {
@@ -144,11 +140,8 @@ extension EventOverviewVC: UIImagePickerControllerDelegate, UINavigationControll
 
 extension EventOverviewVC: EventDetailsVCDelegate {
     func didTapSaveDetailsButton(event: Event) {
-        guard let countdownTime = event.eventCountdownTime else {return}
-        
-        eventCountdownDay = event.eventCountdownDay!
-        eventCountdownTime = countdownTime
         self.event = event
+        
         saveButtonInteractable()
         
         DispatchQueue.main.async {

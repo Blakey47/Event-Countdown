@@ -37,9 +37,6 @@ class EventCell: UICollectionViewCell {
         guard let eventName = event.eventName else {return}
         guard let backgroundImage = event.eventBackgroundImage else {return}
         
-        print("Event name: \(eventName)")
-        print("Background Image: \(UIImage(data: backgroundImage)!)")
-        
         eventNameLabel.text = event.eventName
         eventImageView.image = UIImage(data: backgroundImage)
         
@@ -89,7 +86,6 @@ class EventCell: UICollectionViewCell {
         configureEventImageView()
         configureEventNameLabel()
         configureEventCountdownLabel()
-//        configureDeleteButton()
     }
     
     private func configureEventImageView() {
@@ -122,20 +118,6 @@ class EventCell: UICollectionViewCell {
             eventCountdownTimeLabel.leadingAnchor.constraint(equalTo: eventImageView.leadingAnchor, constant: padding),
             eventCountdownTimeLabel.trailingAnchor.constraint(equalTo: eventImageView.trailingAnchor, constant: -padding),
             eventCountdownTimeLabel.heightAnchor.constraint(equalToConstant: 20)
-        ])
-    }
-    
-    private func configureDeleteButton() {
-        addSubview(deleteButton)
-        
-        deleteButton.setBackgroundImage(UIImage(systemName: SFSymbols.close), for: .normal)
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            deleteButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            deleteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            deleteButton.heightAnchor.constraint(equalToConstant: 20),
-            deleteButton.widthAnchor.constraint(equalToConstant: 20)
         ])
     }
 }

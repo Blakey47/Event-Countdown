@@ -58,9 +58,6 @@ class EventCountdownVC: UIViewController {
     }
     
     @IBAction func addButtonDidTap(_ sender: Any) {
-        DispatchQueue.main.async {self.emptyStateView.transform = CGAffineTransform(translationX: 1000, y: 0)}
-        
-        
         let eventOverviewVC = storyboard?.instantiateViewController(identifier: "EventOverviewVC") as! EventOverviewVC
         eventOverviewVC.eventOverviewVCDelegate = self
         present(eventOverviewVC, animated: true, completion: nil)
@@ -68,9 +65,9 @@ class EventCountdownVC: UIViewController {
 
     func configureEmptyCollectionViewLabel() {
         if events.isEmpty {
-            DispatchQueue.main.async {
-                self.emptyStateView = self.showEmptyStateView(with: self.message, in: self.view)
-            }
+            DispatchQueue.main.async {self.emptyStateView = self.showEmptyStateView(with: self.message, in: self.view)}
+        } else {
+            DispatchQueue.main.async {self.emptyStateView.transform = CGAffineTransform(translationX: 1000, y: 0)}
         }
     }
     
@@ -148,13 +145,12 @@ extension EventCountdownVC: EventOverviewVCDelegate {
     
     func didTapSaveButton(event: Event) {
         events.append(event)
-        collectionView.reloadData()
-        updateData()
         saveData()
+        updateData()
+        collectionView.reloadData()
     }
     
     func didTapCloseButton() {
-        print("Closed")
         if events.isEmpty {
             DispatchQueue.main.async {
                 self.emptyStateView.transform = .identity
@@ -164,9 +160,9 @@ extension EventCountdownVC: EventOverviewVCDelegate {
     
     func didTapSaveEditButton(event: Event, position: Int) {
         events[position] = event
-        collectionView.reloadData()
-        updateData()
         saveData()
+        updateData()
+        collectionView.reloadData()
     }
     
     func didTapDeleteButton(position: Int) {
@@ -198,8 +194,5 @@ extension EventCountdownVC: UICollectionViewDelegate  {
         eventOverviewVC.eventOverviewVCDelegate = self
         present(eventOverviewVC, animated: true)
     }
-    
-    
-    
 }
 
