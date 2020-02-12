@@ -34,7 +34,6 @@ class EventCell: UICollectionViewCell {
     }
     
     func set(event: Event) {
-        guard let eventName = event.eventName else {return}
         guard let backgroundImage = event.eventBackgroundImage else {return}
         
         eventNameLabel.text = event.eventName
@@ -66,18 +65,28 @@ class EventCell: UICollectionViewCell {
     }
     
     private func calculateTimer(for timeLeft: DateComponents) -> String {
+        
         if timeLeft.day! > 3 {
-            return "In \(timeLeft.day ?? 0) days"
+            return "In \(timeLeft.day!) days"
         } else if timeLeft.day! > 1 {
-            return "In \(timeLeft.day ?? 0) days, \(timeLeft.hour ?? 0) hours and \(timeLeft.minute ?? 0) minutes"
+            return "In \(timeLeft.day!) days, \(timeLeft.hour!) hours and \(timeLeft.minute!) minutes"
         } else if timeLeft.hour! > 1 {
-            return "In \(timeLeft.hour ?? 0) hours and \(timeLeft.minute ?? 0) minutes"
+            return "In \(timeLeft.hour!) hours and \(timeLeft.minute!) minutes"
         } else if timeLeft.minute! > 1 {
-            return "\(timeLeft.minute ?? 0) minutes and \(timeLeft.second ?? 0) seconds"
+            return "\(timeLeft.minute!) minutes and \(timeLeft.second!) seconds"
         } else if timeLeft.second! > 1{
-            return "\(timeLeft.second ?? 0) seconds to go"
+            return "\(timeLeft.second!) seconds to go"
+        } else if abs(timeLeft.day!) > 3 {
+            return "\(abs(timeLeft.day!)) days ago"
+        }else if abs(timeLeft.day!) > 1 {
+            return "\(abs(timeLeft.day!)) days, \(abs(timeLeft.hour!)) hours and \(abs(timeLeft.minute!)) minutes ago"
+        } else if abs(timeLeft.hour!) > 1 {
+            return "\(abs(timeLeft.hour!)) hours and \(abs(timeLeft.minute!)) minutes ago"
+        } else if abs(timeLeft.minute!) > 1 {
+            return "\(abs(timeLeft.minute!)) minutes and \(abs(timeLeft.second!)) seconds ago"
+        } else if abs(timeLeft.second!) > 30{
+            return "\(abs(timeLeft.second!)) seconds ago"
         } else {
-            timer.invalidate()
             return "Today"
         }
     }
