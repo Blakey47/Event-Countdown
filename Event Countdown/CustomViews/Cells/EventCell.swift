@@ -78,7 +78,7 @@ class EventCell: UICollectionViewCell {
             return "\(timeLeft.second!) seconds to go"
         } else if abs(timeLeft.day!) > 3 {
             return "\(abs(timeLeft.day!)) days ago"
-        }else if abs(timeLeft.day!) > 1 {
+        } else if abs(timeLeft.day!) > 1 {
             return "\(abs(timeLeft.day!)) days, \(abs(timeLeft.hour!)) hours and \(abs(timeLeft.minute!)) minutes ago"
         } else if abs(timeLeft.hour!) > 1 {
             return "\(abs(timeLeft.hour!)) hours and \(abs(timeLeft.minute!)) minutes ago"

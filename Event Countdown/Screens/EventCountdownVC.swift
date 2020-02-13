@@ -54,7 +54,6 @@ class EventCountdownVC: UIViewController {
         configureCollectionView()
         configureDataSource()
         updateData()
-        configureEmptyCollectionViewLabel()
     }
     
     @IBAction func addButtonDidTap(_ sender: Any) {
@@ -65,9 +64,14 @@ class EventCountdownVC: UIViewController {
 
     func configureEmptyCollectionViewLabel() {
         if events.isEmpty {
+            print("Is Empty")
             DispatchQueue.main.async {self.emptyStateView = self.showEmptyStateView(with: self.message, in: self.view)}
         } else {
-            DispatchQueue.main.async {self.emptyStateView.transform = CGAffineTransform(translationX: 1000, y: 0)}
+            print("Is not Empty")
+            DispatchQueue.main.async {
+                self.emptyStateView.transform = CGAffineTransform(translationX: 1000, y: 0)
+                self.emptyStateView.isHidden = true
+            }
         }
     }
     

@@ -78,24 +78,22 @@ class EventDetailsVC: UIViewController {
         sender.resignFirstResponder()
     }
     
-    private func createEvent(){
-        let dayCount = datePicker.date
-        let timeCount = timePicker.date
+    private func createEvent() {
+        let components = timePicker.calendar.dateComponents([.hour, .minute, .second], from: timePicker.date)
+        let dayCount = Calendar.current.date(bySettingHour: components.hour!, minute: components.minute!, second: components.second!, of: datePicker.date)
         let event = Event(context: managedObjectContext)
         event.eventName = eventNameTextField.text
         event.eventCountdownDay = dayCount
-        event.eventCountdownTime = timeCount
         dismiss(animated: true) {
             self.eventDetailsVCDelegate?.didTapSaveDetailsButton(event: event)
         }
     }
     
     private func saveChanges() {
-        let dayCount = datePicker.date
-        let timeCount = timePicker.date
+        let components = timePicker.calendar.dateComponents([.hour, .minute, .second], from: timePicker.date)
+        let dayCount = Calendar.current.date(bySettingHour: components.hour!, minute: components.minute!, second: components.second!, of: datePicker.date)
         event.eventName = eventNameTextField.text
         event.eventCountdownDay = dayCount
-        event.eventCountdownTime = timeCount
         dismiss(animated: true) {
             self.eventDetailsVCDelegate?.didTapSaveDetailsButton(event: self.event)
         }

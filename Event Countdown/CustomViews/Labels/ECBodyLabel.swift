@@ -29,6 +29,7 @@ class ECBodyLabel: UILabel {
         font = UIFont.preferredFont(forTextStyle: .body)
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.75
+        font = UIFont.systemFont(ofSize: 20, weight: .bold)
         numberOfLines = 3
         lineBreakMode = .byTruncatingTail
         translatesAutoresizingMaskIntoConstraints = false
