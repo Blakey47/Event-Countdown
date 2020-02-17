@@ -20,6 +20,7 @@ class EventCell: UICollectionViewCell {
     
     let deleteButton = UIButton()
     let padding: CGFloat = 20
+    var allDay: Bool!
     
     var timer: Timer!
     
@@ -38,6 +39,7 @@ class EventCell: UICollectionViewCell {
         
         eventNameLabel.text = event.eventName
         eventImageView.image = UIImage(data: backgroundImage)
+        allDay = event.allDay
         
         // Setting the Due Date
         let eventDate = event.eventCountdownDay
@@ -76,6 +78,8 @@ class EventCell: UICollectionViewCell {
             return "\(timeLeft.minute!) minutes and \(timeLeft.second!) seconds"
         } else if timeLeft.second! > 1{
             return "\(timeLeft.second!) seconds to go"
+        } else if allDay == true && abs(timeLeft.day!) < 1 {
+            return "Today"
         } else if abs(timeLeft.day!) > 2 {
             return "\(abs(timeLeft.day!)) days ago"
         } else if abs(timeLeft.day!) > 0 {

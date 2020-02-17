@@ -23,6 +23,7 @@ class EventDetailsVC: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     
     var event: Event!
+    var allDay = true
     var managedObjectContext: NSManagedObjectContext!
     
     override func viewDidLoad() {
@@ -49,6 +50,8 @@ class EventDetailsVC: UIViewController {
     }
 
     @IBAction func AllDaySelecterToggled(_ sender: Any) {
+        allDay.toggle()
+        
         if timePicker.isHidden {
             UIView.animate(withDuration: 0.2, animations: {
                 self.timePicker.transform = CGAffineTransform(translationX: 0, y: 50)
@@ -79,11 +82,20 @@ class EventDetailsVC: UIViewController {
     }
     
     private func createEvent() {
-        let components = timePicker.calendar.dateComponents([.hour, .minute, .second], from: timePicker.date)
+        var components = timePicker.calendar.dateComponents([.hour, .minute, .second], from: timePicker.date)
+        if allDay == true {
+            components.hour = 0
+            components.minute = 0
+            components.second = 0
+        }
         let dayCount = Calendar.current.date(bySettingHour: components.hour!, minute: components.minute!, second: components.second!, of: datePicker.date)
         let event = Event(context: managedObjectContext)
         event.eventName = eventNameTextField.text
         event.eventCountdownDay = dayCount
+        event.allDay = allDay
+        
+        
+        
         dismiss(animated: true) {
             self.eventDetailsVCDelegate?.didTapSaveDetailsButton(event: event)
         }
