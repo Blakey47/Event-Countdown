@@ -76,15 +76,15 @@ class EventCell: UICollectionViewCell {
             return "\(timeLeft.minute!) minutes and \(timeLeft.second!) seconds"
         } else if timeLeft.second! > 1{
             return "\(timeLeft.second!) seconds to go"
-        } else if abs(timeLeft.day!) > 3 {
+        } else if abs(timeLeft.day!) > 2 {
             return "\(abs(timeLeft.day!)) days ago"
-        } else if abs(timeLeft.day!) > 1 {
+        } else if abs(timeLeft.day!) > 0 {
             return "\(abs(timeLeft.day!)) days, \(abs(timeLeft.hour!)) hours and \(abs(timeLeft.minute!)) minutes ago"
-        } else if abs(timeLeft.hour!) > 1 {
+        } else if abs(timeLeft.hour!) > 0 {
             return "\(abs(timeLeft.hour!)) hours and \(abs(timeLeft.minute!)) minutes ago"
-        } else if abs(timeLeft.minute!) > 1 {
+        } else if abs(timeLeft.minute!) > 0 {
             return "\(abs(timeLeft.minute!)) minutes and \(abs(timeLeft.second!)) seconds ago"
-        } else if abs(timeLeft.second!) > 30{
+        } else if abs(timeLeft.second!) > 30 {
             return "\(abs(timeLeft.second!)) seconds ago"
         } else {
             return "Today"

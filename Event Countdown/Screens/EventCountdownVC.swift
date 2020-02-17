@@ -28,7 +28,7 @@ class EventCountdownVC: UIViewController {
     }()
     
     let addEventView = UIView()
-    let message = "You have no Countdowns yet. Please add one."
+    let message = "You have no Events yet.\nPlease add one."
     
     var events: [Event] = []
     var event: Event!
